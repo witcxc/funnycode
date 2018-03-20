@@ -1,0 +1,6 @@
+digraph Hello{
+size="500,500";
+center=true;
+rankdir=LR;
+A->B;
+}

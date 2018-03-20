@@ -1,0 +1,82 @@
+digraph modules{
+	center=true;
+	size="800,800";
+	PSP;
+	Normandy;
+	Zeus;
+	SigmaApiServer;
+	Etcd;
+	HippoMaster;
+	IPAM;
+	SigmaAgent;
+	GNS;
+	NcApiServer;
+	/*    SigmaApiServer->Etcd;
+		  HippoMaster->Etcd;
+		  SigmaApiServer->IPAM;
+		  SigmaApiServer->GNS;
+		  SigmaApiServer->NcApiServer;
+		  SigmaApiServer->Zeus;
+		  edge [color=red];
+		  SigmaApiServer->Carbon;
+	 */
+	PSP -> Normandy 
+	Normandy -> Zeus 
+	Zeus -> SigmaApiServer 
+	HippoMaster -> Etcd 
+	SigmaApiServer -> Etcd 
+	HippoMaster -> Etcd 
+	SigmaApiServer -> IPAM 
+	IPAM -> SigmaApiServer 
+	SigmaApiServer -> GNS 
+	GNS -> Armory 
+	SigmaApiServer -> NcApiServer 
+	NcApiServer -> Container 
+	Container -> NcApiServer 
+	NcApiServer -> SigmaApiServer 
+	SigmaApiServer -> GNS 
+	GNS -> Armory 
+	SigmaApiServer -> Zeus 
+	edge  [color=red];
+
+	PSP -> Normandy 
+	Normandy -> Zeus 
+	Zeus -> SigmaApiServer 
+	HippoMaster -> Etcd 
+	SigmaApiServer -> Etcd 
+	HippoMaster -> Etcd 
+	SigmaApiServer -> IPAM 
+	IPAM -> SigmaApiServer 
+	SigmaApiServer -> GNS 
+	GNS -> Armory 
+	SigmaApiServer -> NcApiServer 
+	NcApiServer -> Container 
+	Container -> NcApiServer 
+	NcApiServer -> SigmaApiServer 
+	SigmaApiServer -> GNS 
+	GNS -> Armory 
+	SigmaApiServer -> Zeus 
+
+	edge  [color=blue];
+
+	PSP -> Normandy 
+	HippoMaster -> Etcd 
+	Normandy -> Normandy 
+	Normandy -> Zeus 
+	Zeus -> SigmaApiServer 
+	SigmaApiServer -> Etcd 
+	HippoMaster -> Etcd 
+	SigmaApiServer -> NcApiServer 
+	NcApiServer -> SigmaApiServer 
+	SigmaAgent -> NcApiServer 
+	SigmaAgent -> Etcd 
+	SigmaApiServer -> IPAM 
+#IPAM -> SigmaApiServer 
+	SigmaApiServer -> GNS 
+	SigmaApiServer -> Zeus 
+	HippoMaster -> Etcd 
+	Zeus -> Normandy 
+	//SigmaApiServer -> Zeus 
+	//Zeus -> Normandy 
+	Normandy -> PSP 
+}

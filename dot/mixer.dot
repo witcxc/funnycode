@@ -1,0 +1,38 @@
+digraph a{
+rankdir=TB
+node [shape=box]
+Node [style=filled, fillcolor="olivedrab3"]
+"spa"
+"mixer"[fillcolor="steelblue3"]
+"ranker"
+
+"gmt/isp/.."
+"pa-cs"[fillcolor="lightblue"]
+"retrcc"[fillcolor="steelblue3"]
+"imbs-proxy"[fillcolor="steelblue3"]
+"pat-index"[fillcolor="steelblue3"]
+"exact-index/.."
+"advserver"
+
+{rank=same;"mixer","spa","ranker"}
+{rank=same;"retrcc","imbs-proxy"}
+"mixer"->"spa"[label="1"]
+"spa"->"mixer"[label="2"]
+"mixer"->"retrcc"[label="3"]
+"retrcc"->"gmt/isp/.."[label="4"]
+"retrcc"->"pa-cs"[label="5"]
+"gmt/isp/.."->"retrcc"[label="6"]
+"pa-cs"->"retrcc"[label="7"]
+"retrcc"->"mixer"[label="8"]
+"mixer"->"imbs-proxy"[label="9"]
+"imbs-proxy"->"pat-index"[label="10"]
+"imbs-proxy"->"exact-index/.."[label="11"]
+"pat-index"->"imbs-proxy"[label="12"]
+"exact-index/.."->"imbs-proxy"[label="13"]
+"imbs-proxy"->"advserver"[label="14"]
+"advserver"->"imbs-proxy"[label="15"]
+"imbs-proxy"->"mixer"[label="16"]
+"mixer"->"ranker"[label="17"]
+"ranker"->"mixer"[label="18"]
+
+}

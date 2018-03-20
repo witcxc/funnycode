@@ -1,0 +1,564 @@
+%!PS-Adobe-3.0 EPSF-3.0
+%%Creator: graphviz version 2.40.1 (20161225.0304)
+%%Title: a
+%%Pages: 1
+%%BoundingBox: 36 36 528 370
+%%EndComments
+save
+%%BeginProlog
+/DotDict 200 dict def
+DotDict begin
+
+/setupLatin1 {
+mark
+/EncodingVector 256 array def
+ EncodingVector 0
+
+ISOLatin1Encoding 0 255 getinterval putinterval
+EncodingVector 45 /hyphen put
+
+% Set up ISO Latin 1 character encoding
+/starnetISO {
+        dup dup findfont dup length dict begin
+        { 1 index /FID ne { def }{ pop pop } ifelse
+        } forall
+        /Encoding EncodingVector def
+        currentdict end definefont
+} def
+/Times-Roman starnetISO def
+/Times-Italic starnetISO def
+/Times-Bold starnetISO def
+/Times-BoldItalic starnetISO def
+/Helvetica starnetISO def
+/Helvetica-Oblique starnetISO def
+/Helvetica-Bold starnetISO def
+/Helvetica-BoldOblique starnetISO def
+/Courier starnetISO def
+/Courier-Oblique starnetISO def
+/Courier-Bold starnetISO def
+/Courier-BoldOblique starnetISO def
+cleartomark
+} bind def
+
+%%BeginResource: procset graphviz 0 0
+/coord-font-family /Times-Roman def
+/default-font-family /Times-Roman def
+/coordfont coord-font-family findfont 8 scalefont def
+
+/InvScaleFactor 1.0 def
+/set_scale {
+       dup 1 exch div /InvScaleFactor exch def
+       scale
+} bind def
+
+% styles
+/solid { [] 0 setdash } bind def
+/dashed { [9 InvScaleFactor mul dup ] 0 setdash } bind def
+/dotted { [1 InvScaleFactor mul 6 InvScaleFactor mul] 0 setdash } bind def
+/invis {/fill {newpath} def /stroke {newpath} def /show {pop newpath} def} bind def
+/bold { 2 setlinewidth } bind def
+/filled { } bind def
+/unfilled { } bind def
+/rounded { } bind def
+/diagonals { } bind def
+/tapered { } bind def
+
+% hooks for setting color 
+/nodecolor { sethsbcolor } bind def
+/edgecolor { sethsbcolor } bind def
+/graphcolor { sethsbcolor } bind def
+/nopcolor {pop pop pop} bind def
+
+/beginpage {	% i j npages
+	/npages exch def
+	/j exch def
+	/i exch def
+	/str 10 string def
+	npages 1 gt {
+		gsave
+			coordfont setfont
+			0 0 moveto
+			(\() show i str cvs show (,) show j str cvs show (\)) show
+		grestore
+	} if
+} bind def
+
+/set_font {
+	findfont exch
+	scalefont setfont
+} def
+
+% draw text fitted to its expected width
+/alignedtext {			% width text
+	/text exch def
+	/width exch def
+	gsave
+		width 0 gt {
+			[] 0 setdash
+			text stringwidth pop width exch sub text length div 0 text ashow
+		} if
+	grestore
+} def
+
+/boxprim {				% xcorner ycorner xsize ysize
+		4 2 roll
+		moveto
+		2 copy
+		exch 0 rlineto
+		0 exch rlineto
+		pop neg 0 rlineto
+		closepath
+} bind def
+
+/ellipse_path {
+	/ry exch def
+	/rx exch def
+	/y exch def
+	/x exch def
+	matrix currentmatrix
+	newpath
+	x y translate
+	rx ry scale
+	0 0 1 0 360 arc
+	setmatrix
+} bind def
+
+/endpage { showpage } bind def
+/showpage { } def
+
+/layercolorseq
+	[	% layer color sequence - darkest to lightest
+		[0 0 0]
+		[.2 .8 .8]
+		[.4 .8 .8]
+		[.6 .8 .8]
+		[.8 .8 .8]
+	]
+def
+
+/layerlen layercolorseq length def
+
+/setlayer {/maxlayer exch def /curlayer exch def
+	layercolorseq curlayer 1 sub layerlen mod get
+	aload pop sethsbcolor
+	/nodecolor {nopcolor} def
+	/edgecolor {nopcolor} def
+	/graphcolor {nopcolor} def
+} bind def
+
+/onlayer { curlayer ne {invis} if } def
+
+/onlayers {
+	/myupper exch def
+	/mylower exch def
+	curlayer mylower lt
+	curlayer myupper gt
+	or
+	{invis} if
+} def
+
+/curlayer 0 def
+
+%%EndResource
+%%EndProlog
+%%BeginSetup
+14 default-font-family set_font
+% /arrowlength 10 def
+% /arrowwidth 5 def
+
+% make sure pdfmark is harmless for PS-interpreters other than Distiller
+/pdfmark where {pop} {userdict /pdfmark /cleartomark load put} ifelse
+% make '<<' and '>>' safe on PS Level 1 devices
+/languagelevel where {pop languagelevel}{1} ifelse
+2 lt {
+    userdict (<<) cvn ([) cvn load put
+    userdict (>>) cvn ([) cvn load put
+} if
+
+%%EndSetup
+setupLatin1
+%%Page: 1 1
+%%PageBoundingBox: 36 36 528 370
+%%PageOrientation: Portrait
+0 0 1 beginpage
+gsave
+36 36 492 334 boxprim clip newpath
+1 1 set_scale 0 rotate 40 40 translate
+% App
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+newpath 332.2648 325.9713 moveto
+278.2648 325.9713 lineto
+278.2648 289.9713 lineto
+332.2648 289.9713 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+293.2096 303.7713 moveto 24.1104 (App) alignedtext
+grestore
+% SigmaApiserver
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+305.2648 235.9713 67.6529 18 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+259.775 231.7713 moveto 90.9795 (SigmaApiserver) alignedtext
+grestore
+% App->SigmaApiserver
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 305.2648 289.8027 moveto
+305.2648 282.1023 305.2648 272.9457 305.2648 264.3879 curveto
+stroke
+0 0 0 edgecolor
+newpath 308.7649 264.3845 moveto
+305.2648 254.3846 lineto
+301.7649 264.3846 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 308.7649 264.3845 moveto
+305.2648 254.3846 lineto
+301.7649 264.3846 lineto
+closepath stroke
+grestore
+% HostInfo
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+newpath 202.0376 325.9713 moveto
+136.4919 325.9713 lineto
+136.4919 289.9713 lineto
+202.0376 289.9713 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+144.3785 303.7713 moveto 49.7725 (HostInfo) alignedtext
+grestore
+% SigmaBoss
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+169.2648 235.9713 49.8223 18 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+137.7579 231.7713 moveto 63.0137 (SigmaBoss) alignedtext
+grestore
+% HostInfo->SigmaBoss
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 169.2648 289.8027 moveto
+169.2648 282.1023 169.2648 272.9457 169.2648 264.3879 curveto
+stroke
+0 0 0 edgecolor
+newpath 172.7649 264.3845 moveto
+169.2648 254.3846 lineto
+165.7649 264.3846 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 172.7649 264.3845 moveto
+169.2648 254.3846 lineto
+165.7649 264.3846 lineto
+closepath stroke
+grestore
+% Etcd
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+newpath 197.7302 148.5155 moveto
+197.7302 163.4272 lineto
+181.0556 173.9713 lineto
+157.474 173.9713 lineto
+140.7993 163.4272 lineto
+140.7993 148.5155 lineto
+157.474 137.9713 lineto
+181.0556 137.9713 lineto
+closepath stroke
+1 setlinewidth
+0 0 0 nodecolor
+newpath 201.7281 146.3116 moveto
+201.7281 165.631 lineto
+182.213 177.9713 lineto
+156.3165 177.9713 lineto
+136.8014 165.631 lineto
+136.8014 146.3116 lineto
+156.3165 133.9713 lineto
+182.213 133.9713 lineto
+closepath stroke
+1 setlinewidth
+0 0 0 nodecolor
+newpath 205.726 144.1077 moveto
+205.726 167.8349 lineto
+183.3705 181.9713 lineto
+155.1591 181.9713 lineto
+132.8036 167.8349 lineto
+132.8036 144.1077 lineto
+155.1591 129.9713 lineto
+183.3705 129.9713 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+156.4371 151.7713 moveto 25.6553 (Etcd) alignedtext
+grestore
+% SigmaApiserver->Etcd
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 277.0855 219.3953 moveto
+256.7077 207.4083 228.9635 191.0882 206.722 178.005 curveto
+stroke
+0 0 0 edgecolor
+newpath 208.2698 174.8548 moveto
+197.8759 172.8014 lineto
+204.7206 180.8884 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 208.2698 174.8548 moveto
+197.8759 172.8014 lineto
+204.7206 180.8884 lineto
+closepath stroke
+grestore
+% IPAM
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+335.2648 155.9713 31.3163 18 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+318.4039 151.7713 moveto 33.7217 (IPAM) alignedtext
+grestore
+% SigmaApiserver->IPAM
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 312.0722 217.8181 moveto
+315.8963 207.6205 320.7451 194.6904 325.0195 183.2922 curveto
+stroke
+0 0 0 edgecolor
+newpath 328.3534 184.3694 moveto
+328.5876 173.7771 lineto
+321.7991 181.9115 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 328.3534 184.3694 moveto
+328.5876 173.7771 lineto
+321.7991 181.9115 lineto
+closepath stroke
+grestore
+% Armory
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+423.2648 155.9713 38.211 18 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+401.1027 151.7713 moveto 44.3242 (Armory) alignedtext
+grestore
+% SigmaApiserver->Armory
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 330.0014 219.2007 moveto
+348.2863 206.8042 373.2901 189.8525 392.8056 176.6216 curveto
+stroke
+0 0 0 edgecolor
+newpath 395.0291 179.3427 moveto
+401.3421 170.8341 lineto
+391.1009 173.5488 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 395.0291 179.3427 moveto
+401.3421 170.8341 lineto
+391.1009 173.5488 lineto
+closepath stroke
+grestore
+% DockerDaemon
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+306.2648 46.9857 66.1821 18 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+261.9508 42.7857 moveto 88.6279 (DockerDaemon) alignedtext
+grestore
+% SigmaApiserver->DockerDaemon
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 300.9973 217.5934 moveto
+298.8028 207.2027 296.3631 193.9343 295.2648 181.9713 curveto
+291.8867 145.1781 296.8004 102.6935 301.0993 75.3679 curveto
+stroke
+0 0 0 edgecolor
+newpath 304.5797 75.7731 moveto
+302.7578 65.3361 lineto
+297.6734 74.6312 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 304.5797 75.7731 moveto
+302.7578 65.3361 lineto
+297.6734 74.6312 lineto
+closepath stroke
+grestore
+% SigmaMaster
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+57.2648 155.9713 57.0305 18 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+19.9371 151.7713 moveto 74.6553 (SigmaMaster) alignedtext
+grestore
+% SigmaMaster->Etcd
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 114.5773 155.9713 moveto
+117.1942 155.9713 119.811 155.9713 122.4279 155.9713 curveto
+stroke
+0 0 0 edgecolor
+newpath 122.5216 159.4714 moveto
+132.5216 155.9713 lineto
+122.5216 152.4714 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 122.5216 159.4714 moveto
+132.5216 155.9713 lineto
+122.5216 152.4714 lineto
+closepath stroke
+grestore
+% SigmaAgent
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+168.2648 46.9857 54.1403 18 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+133.2682 42.7857 moveto 69.9932 (SigmaAgent) alignedtext
+grestore
+% SigmaAgent->Etcd
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 168.4304 65.0407 moveto
+168.5667 79.8877 168.764 101.3957 168.9326 119.7667 curveto
+stroke
+0 0 0 edgecolor
+newpath 165.4335 119.8991 moveto
+169.0253 129.8665 lineto
+172.4333 119.8348 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 165.4335 119.8991 moveto
+169.0253 129.8665 lineto
+172.4333 119.8348 lineto
+closepath stroke
+grestore
+% SigmaAgent->DockerDaemon
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 222.7101 46.9857 moveto
+225.1427 46.9857 227.5753 46.9857 230.0079 46.9857 curveto
+stroke
+0 0 0 edgecolor
+newpath 230.0086 50.4858 moveto
+240.0085 46.9857 lineto
+230.0085 43.4858 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 230.0086 50.4858 moveto
+240.0085 46.9857 lineto
+230.0085 43.4858 lineto
+closepath stroke
+grestore
+% SigmaBoss->Etcd
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 169.2648 217.8181 moveto
+169.2648 210.2634 169.2648 201.2089 169.2648 192.3887 curveto
+stroke
+0 0 0 edgecolor
+newpath 172.7649 192.2459 moveto
+169.2648 182.2459 lineto
+165.7649 192.246 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 172.7649 192.2459 moveto
+169.2648 182.2459 lineto
+165.7649 192.246 lineto
+closepath stroke
+grestore
+% Container
+gsave
+0.53725 0.24706 0.90196 nodecolor
+437.2648 46.9857 38.9738 38.9738 ellipse_path fill
+1 setlinewidth
+filled
+0.53725 0.24706 0.90196 nodecolor
+437.2648 46.9857 38.9738 38.9738 ellipse_path stroke
+1 setlinewidth
+filled
+0.53725 0.24706 0.90196 nodecolor
+437.2648 46.9857 42.9725 42.9725 ellipse_path stroke
+1 setlinewidth
+filled
+0.53725 0.24706 0.90196 nodecolor
+437.2648 46.9857 46.9713 46.9713 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+409.6613 42.7857 moveto 55.207 (Container) alignedtext
+grestore
+% DockerDaemon->Container
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 372.5324 46.9857 moveto
+375.0215 46.9857 377.5106 46.9857 379.9997 46.9857 curveto
+stroke
+0 0 0 edgecolor
+newpath 380.2327 50.4858 moveto
+390.2326 46.9857 lineto
+380.2326 43.4858 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 380.2327 50.4858 moveto
+390.2326 46.9857 lineto
+380.2326 43.4858 lineto
+closepath stroke
+grestore
+endpage
+showpage
+grestore
+%%PageTrailer
+%%EndPage: 1
+%%Trailer
+end
+restore
+%%EOF

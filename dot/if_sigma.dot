@@ -1,0 +1,38 @@
+digraph sigma{
+	center=true;
+	size="800,800";
+    label = "\n\n\n模块间交互\nW:写\nR:读\nD:删"
+    SigmaBoss->Etcd[label = "W:新应用上线元信息\nW:Group允许使用的quota情况\nW:应用已使用多少Quota资源"];
+    Etcd->SigmaApiServer[label="R"];
+	edge [color=red];
+    SigmaApiServer->Etcd[label="W:应用需求规格描述\nW:应用主动释放slot信息"];
+    Etcd->HippoMaster[label="R"];
+
+	edge [color=blue];
+    HippoMaster->Etcd[label="W:应用最后一次创建请求体\nW:应用请求响应\nW:应用资源分配表\nW:资源分配计划"];
+    Etcd->SigmaApiServer[label="R"];
+	edge [color=brown];
+    SigmaApiServer->Etcd[label="W:应用镜像\nW:基线\nW:packageinfo定义"];
+    Etcd->HippoSlave[label="R"];
+	edge [color=orange];
+    SigmaBoss->Etcd[label="W:宿主机可用状态\nW:机位虚拟比等逻辑信息"];
+    Etcd->HippoMaster[label="R"];
+	edge [color=green];
+    SigmaAgent->Etcd[label="W:本机能采集到的数据"];
+    Etcd->HippoMaster[label="R"];
+	edge [color=yellow];
+    SigmaAgent->Etcd[label="W:资源使用现状"];
+    Etcd->HippoMaster[label="R"];
+    Etcd->SigmaApiServer[label="R"];
+	edge [color=cyan];
+    SigmaApiServer->Etcd[label="W:资源分配结果"];
+    Etcd->SigmaApiServer[label="R"];
+	edge [color=magenta];
+    HippoMaster->Etcd[label="W:当前所有可以走回收流程的slot信息"];
+    Etcd->SigmaApiServer[label="R"];
+    Etcd->SigmaApiServer[label="D"];
+	edge [color=gray];
+    HippoMaster->Etcd[label="W:系统状态\nW:slaves状"];
+    Etcd->HippoSlave[label="R"];
+
+}

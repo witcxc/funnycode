@@ -1,0 +1,29 @@
+digraph a{
+Node [style=filled, fillcolor="olivedrab3"]
+"App"[shape="box"]
+"HostInfo"[shape="box"]
+"SigmaApiserver"[fillcolor="steelblue1"]
+"SigmaMaster"[fillcolor="steelblue3"]
+"SigmaBoss"[fillcolor="steelblue3"]
+"Etcd"[shape=tripleoctagon]
+"IPAM"
+"Armory"
+"DockerDaemon"
+"SigmaAgent"
+"Container"[shape="doublecircle",peripheries=3,color=lightblue,style=filled,width=0.75]
+{rank=same;"SigmaBoss","SigmaApiserver"}
+{rank=max;"Container","DockerDaemon","SigmaAgent"}
+{rank=same;"SigmaMaster","Etcd","IPAM","Armory"}
+"App"->"SigmaApiserver"
+"HostInfo"->"SigmaBoss"
+"SigmaApiserver"->"Etcd"
+"SigmaMaster"->"Etcd"
+"SigmaAgent"->"Etcd"
+"SigmaBoss"->"Etcd"
+"SigmaApiserver"->"IPAM"
+"SigmaApiserver"->"Armory"
+"SigmaApiserver"->"DockerDaemon"
+"SigmaAgent"->"DockerDaemon"
+"DockerDaemon"->"Container"
+
+}

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+
+<link rel="stylesheet" type="text/css" href="file:///Users/happyleaf/Library/Application%20Support/MacDown/Styles/GitHub2.css">
+
+<link rel="stylesheet" type="text/css" href="file:///Users/happyleaf/Library/Developer/Xcode/DerivedData/MacDown-geuldoyndykhblbeaeiaiztdhbqc/Build/Products/Debug/MacDown.app/Contents/Resources/Prism/themes/prism.css">
+
+<link rel="stylesheet" type="text/css" href="file:///Users/happyleaf/Library/Developer/Xcode/DerivedData/MacDown-geuldoyndykhblbeaeiaiztdhbqc/Build/Products/Debug/MacDown.app/Contents/Resources/Prism/plugins/line-numbers/prism-line-numbers.css">
+
+<link rel="stylesheet" type="text/css" href="file:///Users/happyleaf/Library/Developer/Xcode/DerivedData/MacDown-geuldoyndykhblbeaeiaiztdhbqc/Build/Products/Debug/MacDown.app/Contents/Resources/Extensions/mermaid.forest.css">
+
+
+</head>
+
+<body>
+
+<h3 id="toc_0">Apiserver PPT</h3>
+
+<h2 id="toc_1">概览</h2>
+
+<div><pre class="line-numbers"><code class="language-dot">digraph a{
+Node [style=filled, fillcolor=&quot;olivedrab3&quot;]
+&quot;App&quot;[shape=&quot;box&quot;]
+&quot;HostInfo&quot;[shape=&quot;box&quot;]
+&quot;SigmaApiserver&quot;[fillcolor=&quot;steelblue1&quot;]
+&quot;SigmaMaster&quot;[fillcolor=&quot;steelblue3&quot;]
+&quot;SigmaBoss&quot;[fillcolor=&quot;steelblue3&quot;]
+&quot;Etcd&quot;[shape=tripleoctagon]
+&quot;IPAM&quot;
+&quot;Armory&quot;
+&quot;DockerDaemon&quot;
+&quot;SigmaAgent&quot;
+&quot;Container&quot;[shape=&quot;doublecircle&quot;,peripheries=3,color=lightblue,style=filled,width=0.75]
+{rank=same;&quot;SigmaBoss&quot;,&quot;SigmaApiserver&quot;}
+{rank=max;&quot;Container&quot;,&quot;DockerDaemon&quot;,&quot;SigmaAgent&quot;}
+{rank=same;&quot;SigmaMaster&quot;,&quot;Etcd&quot;,&quot;IPAM&quot;,&quot;Armory&quot;}
+&quot;App&quot;-&gt;&quot;SigmaApiserver&quot;
+&quot;HostInfo&quot;-&gt;&quot;SigmaBoss&quot;
+&quot;SigmaApiserver&quot;-&gt;&quot;Etcd&quot;
+&quot;SigmaMaster&quot;-&gt;&quot;Etcd&quot;
+&quot;SigmaAgent&quot;-&gt;&quot;Etcd&quot;
+&quot;SigmaBoss&quot;-&gt;&quot;Etcd&quot;
+&quot;SigmaApiserver&quot;-&gt;&quot;IPAM&quot;
+&quot;SigmaApiserver&quot;-&gt;&quot;Armory&quot;
+&quot;SigmaApiserver&quot;-&gt;&quot;DockerDaemon&quot;
+&quot;SigmaAgent&quot;-&gt;&quot;DockerDaemon&quot;
+&quot;DockerDaemon&quot;-&gt;&quot;Container&quot;
+
+}
+</code></pre></div>
+
+<h2 id="toc_2">apiserver功能</h2>
+
+<div><pre class="line-numbers"><code class="language-dot">digraph a{
+rankdir=LR
+&quot;SigmaApiserver&quot;
+node [shape=box]
+
+&quot;创建容器&quot;
+&quot;销毁容器&quot;
+&quot;启动容器&quot;
+&quot;停止容器&quot;
+&quot;重启容器&quot;
+&quot;查询容器&quot;
+&quot;更新容器&quot;
+&quot;升级容器&quot;
+&quot;SigmaApiserver&quot;-&gt;&quot;创建容器&quot;
+&quot;SigmaApiserver&quot;-&gt;&quot;销毁容器&quot;
+&quot;SigmaApiserver&quot;-&gt;&quot;启动容器&quot;
+&quot;SigmaApiserver&quot;-&gt;&quot;停止容器&quot;
+&quot;SigmaApiserver&quot;-&gt;&quot;重启容器&quot;
+&quot;SigmaApiserver&quot;-&gt;&quot;查询容器&quot;
+&quot;SigmaApiserver&quot;-&gt;&quot;更新容器&quot;
+&quot;SigmaApiserver&quot;-&gt;&quot;升级容器&quot;
+
+}</code></pre></div>
+
+<h2 id="toc_3">创建容器</h2>
+
+<div><pre class="line-numbers"><code class="language-mermaid">sequenceDiagram
+participant App
+participant SigmaApiserver
+participant Etcd
+participant SigmaMaster
+participant IPAM
+participant Armory
+participant Dockerd
+participant SigmaAgent
+
+App-&gt;&gt;SigmaApiserver:POST:/containers/create
+SigmaApiserver-&gt;&gt;Etcd:write requirements
+loop Alloc
+Etcd -&gt;&gt;SigmaMaster:read requirements
+SigmaMaster-&gt;&gt;Etcd:write allocplan
+end
+Etcd-&gt;&gt;SigmaApiserver:get allocplans
+SigmaApiserver-&gt;&gt;IPAM:get ips
+SigmaApiserver-&gt;&gt;Armory:create armory items(ping ip to avoid confict)
+SigmaApiserver-&gt;&gt;Etcd:write allocaddrs
+SigmaApiserver-&gt;&gt;Dockerd:create container
+SigmaApiserver-&gt;&gt;App:Done
+Dockerd--&gt;&gt; SigmaAgent:new slot
+SigmaApiserver-&gt;&gt;Armory:update ips to online
+SigmaAgent--&gt;&gt;Etcd:update slotstates
+</code></pre></div>
+
+<h2 id="toc_4">删除容器</h2>
+
+<div><pre class="line-numbers"><code class="language-mermaid">sequenceDiagram
+participant App
+participant SigmaApiserver
+participant Etcd
+participant SigmaMaster
+participant IPAM
+participant Armory
+participant Dockerd
+
+App-&gt;&gt;SigmaApiserver:DELETE:/containers/id
+SigmaApiserver-&gt;&gt;Dockerd:remove container
+SigmaApiserver-&gt;&gt;IPAM:release ip 
+SigmaApiserver-&gt;&gt;Armory:unregister ip
+Etcd-&gt;&gt;SigmaApiserver:get allocplans
+SigmaApiserver-&gt;&gt;Etcd:write release infos
+SigmaApiserver-&gt;&gt;Etcd:delete slotstates,allocaddrs
+SigmaApiserver-&gt;&gt;App:Done
+Etcd--&gt;&gt;SigmaMaster:read release info
+SigmaMaster--&gt;Etcd:remove allocplan
+</code></pre></div>
+
+<h2 id="toc_5"></h2>
+
+<div><pre class="line-numbers"><code class="language-dot">digraph b{
+    center=true;
+    size=&quot;500,100&quot;;
+    label = &quot;\n\n\n模块间交互\nW:写\nR:读\nD:删&quot;
+    {rank=same;SigmaApiServer, SigmaBoss}
+    {rank=same; HippoMaster, HippoSlave, SigmaAgent}
+    {rank=same; Etcd}
+    SigmaBoss-&gt;Etcd[label = &quot;W:新应用上线元信息\nW:Group允许使用的quota情况\nW:应用已使用多少Quota资源&quot;];
+    Etcd-&gt;SigmaApiServer[label=&quot;R&quot;];
+    edge [color=red];
+    SigmaApiServer-&gt;Etcd[label=&quot;W:应用需求规格描述\nW:应用主动释放slot信息&quot;];
+    Etcd-&gt;HippoMaster[label=&quot;R&quot;];
+
+    edge [color=blue];
+    HippoMaster-&gt;Etcd[label=&quot;W:应用最后一次创建请求体\nW:应用请求响应\nW:应用资源分配表\nW:资源分配计划&quot;];
+    Etcd-&gt;SigmaApiServer[label=&quot;R&quot;];
+    edge [color=brown];
+    SigmaApiServer-&gt;Etcd[label=&quot;W:应用镜像\nW:基线\nW:packageinfo定义&quot;];
+    Etcd-&gt;HippoSlave[label=&quot;R&quot;];
+    edge [color=orange];
+    SigmaBoss-&gt;Etcd[label=&quot;W:宿主机可用状态\nW:机位虚拟比等逻辑信息&quot;];
+    Etcd-&gt;HippoMaster[label=&quot;R&quot;];
+    edge [color=green];
+    SigmaAgent-&gt;Etcd[label=&quot;W:本机能采集到的数据&quot;];
+    Etcd-&gt;HippoMaster[label=&quot;R&quot;];
+    edge [color=yellow];
+    SigmaAgent-&gt;Etcd[label=&quot;W:资源使用现状&quot;];
+    Etcd-&gt;HippoMaster[label=&quot;R&quot;];
+    Etcd-&gt;SigmaApiServer[label=&quot;R&quot;];
+    edge [color=cyan];
+    SigmaApiServer-&gt;Etcd[label=&quot;W:资源分配结果&quot;];
+    Etcd-&gt;SigmaApiServer[label=&quot;R&quot;];
+    edge [color=magenta];
+    HippoMaster-&gt;Etcd[label=&quot;W:当前所有可以走回收流程的slot信息&quot;];
+    Etcd-&gt;SigmaApiServer[label=&quot;R&quot;];
+    Etcd-&gt;SigmaApiServer[label=&quot;D&quot;];
+    edge [color=gray];
+    HippoMaster-&gt;Etcd[label=&quot;W:系统状态\nW:slaves状&quot;];
+    Etcd-&gt;HippoSlave[label=&quot;R&quot;];
+}</code></pre></div>
+
+<div><pre class="line-numbers"><code class="language-dot">digraph a{
+&quot;资源回收&quot;[shape=&quot;box&quot;]
+&quot;巡检&quot;[shape=&quot;box&quot;]
+&quot;重新绑核&quot;[shape=&quot;box&quot;]
+&quot;定时任务&quot;-&gt;&quot;资源回收&quot;
+&quot;定时任务&quot;-&gt;&quot;巡检&quot;
+&quot;定时任务&quot;-&gt;&quot;重新绑核&quot;
+}</code></pre></div>
+
+<hr>
+
+<div><pre class="line-numbers"><code class="language-dot">digraph a{
+&quot;MetaSwarm&quot;
+&quot;SwarmProxy&quot;[shape=&quot;box&quot;]
+&quot;SigmaApiServer1&quot;[shape=&quot;box&quot;]
+&quot;SigmaApiServer2&quot;[shape=&quot;box&quot;]
+&quot;SigmaMaster1&quot;[shape=&quot;box&quot;]
+&quot;SigmaMaster2&quot;[shape=&quot;box&quot;]
+&quot;MetaSwarm&quot;-&gt;&quot;SwarmProxy&quot;
+&quot;MetaSwarm&quot;-&gt;&quot;SigmaApiServer1&quot;
+&quot;MetaSwarm&quot;-&gt;&quot;SigmaApiServer2&quot;
+&quot;MetaSwarm&quot;-&gt;&quot;SigmaMaster1&quot;
+&quot;MetaSwarm&quot;-&gt;&quot;SigmaMaster2&quot;
+
+
+{rank=source;&quot;MetaSwarm&quot;}
+{rank=same;&quot;SwarmProxy&quot;,&quot;SigmaApiServer1&quot;,&quot;SigmaApiServer2&quot;,&quot;SigmaMaster1&quot;,&quot;SigmaMaster2&quot;}
+}</code></pre></div>
+
+<div><pre class="line-numbers"><code class="language-dot">digraph cluster0{
+&quot;AliDocker&quot;
+&quot;SigmaAgent&quot;
+}</code></pre></div>
+
+<hr>
+
+
+
+<script type="text/javascript" src="file:///Users/happyleaf/Library/Developer/Xcode/DerivedData/MacDown-geuldoyndykhblbeaeiaiztdhbqc/Build/Products/Debug/MacDown.app/Contents/Resources/Prism/components/prism-core.min.js"></script>
+
+<script type="text/javascript" src="file:///Users/happyleaf/Library/Developer/Xcode/DerivedData/MacDown-geuldoyndykhblbeaeiaiztdhbqc/Build/Products/Debug/MacDown.app/Contents/Resources/Prism/plugins/line-numbers/prism-line-numbers.min.js"></script>
+
+<script type="text/javascript" src="file:///Users/happyleaf/Library/Developer/Xcode/DerivedData/MacDown-geuldoyndykhblbeaeiaiztdhbqc/Build/Products/Debug/MacDown.app/Contents/Resources/Extensions/mermaid.min.js"></script>
+
+<script type="text/javascript" src="file:///Users/happyleaf/Library/Developer/Xcode/DerivedData/MacDown-geuldoyndykhblbeaeiaiztdhbqc/Build/Products/Debug/MacDown.app/Contents/Resources/Extensions/mermaid.init.js"></script>
+
+<script type="text/javascript" src="file:///Users/happyleaf/Library/Developer/Xcode/DerivedData/MacDown-geuldoyndykhblbeaeiaiztdhbqc/Build/Products/Debug/MacDown.app/Contents/Resources/Extensions/viz.js"></script>
+
+<script type="text/javascript" src="file:///Users/happyleaf/Library/Developer/Xcode/DerivedData/MacDown-geuldoyndykhblbeaeiaiztdhbqc/Build/Products/Debug/MacDown.app/Contents/Resources/Extensions/viz.init.js"></script>
+
+<script type="text/x-mathjax-config">
+(function () {
+
+MathJax.Hub.Config({
+    'showProcessingMessages': false,
+    'messageStyle': 'none'
+});
+
+if (typeof MathJaxListener !== 'undefined') {
+    MathJax.Hub.Register.StartupHook('End', function () {
+        MathJaxListener.invokeCallbackForKey_('End');
+    });
+}
+
+})();
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+</body>
+
+</html>

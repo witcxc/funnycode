@@ -1,0 +1,42 @@
+digraph test123 {
+
+size="800,800";
+center=true;
+rankdir=LR;
+//子图
+subgraph cluster_0 {
+    style=filled;
+    color=lightgrey;
+    node [style=filled,color=white];
+    a0 -> a1 -> a2 -> a3;
+    label = "process #1";
+}
+subgraph cluster_1 {
+    node [style=filled];
+    b0 -> b1 -> b2 -> b3;
+    label = "process #2";
+    color=blue;
+
+    subgraph cluster_2 {
+        node [style=filled];
+        c1[shape=circle,peripheries=3,color=red];
+        c0 -> c1 -> c2 -> c3[color=yellow];
+        label = "process #3";
+        color=blue
+    }
+}
+//定义节点和边的属性
+start -> a0[style=bold,label="first",decorate=true];
+start -> b0;
+a1 -> b3[style=dotted,color=red,dir=both];
+b2 -> a3[style=dashed,dir=back];
+a3 -> a0[weight=20];
+a3 -> end;
+{b3,c3} -> end;
+
+a3[shape=ellipse,color=green];
+a1[color=red,style=diagonals];
+a2[shape=plaintext,color=orange];
+start [shape=Mdiamond];
+end [shape=Msquare,label="make a\n End"];
+}
