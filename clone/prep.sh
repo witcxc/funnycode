@@ -9,7 +9,15 @@ visudo
 #username        ALL=(ALL)      ALL
 
 git clone git@github.com:witcxc/funnycode.git
-yum install go
+
+#yum install go
+wget https://dl.google.com/go/go1.10.1.linux-amd64.tar.gz
+tar -C /usr/local -xzf go$VERSION.$OS-$ARCH.tar.gz
+export GOROOT=/usr/local/go
+export PATH=$PATH:$GOROOT/bin
+export GOPATH=/home/happyleaf/go
+
+
 go get github.com/shadowsocks/shadowsocks-go/cmd/shadowsocks-server
 make all
 
